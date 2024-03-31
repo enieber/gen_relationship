@@ -9,12 +9,16 @@ use crate::models::_entities::items::{ActiveModel, Entity, Model};
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Params {
     pub code: Option<String>,
-    }
+    pub role_id: i32,
+    pub classification_id: i32,
+}
 
 impl Params {
     fn update(&self, item: &mut ActiveModel) {
       item.code = Set(self.code.clone());
-      }
+      item.role_id = Set(self.role_id);
+      item.classification_id = Set(self.classification_id);
+    }
 }
 
 async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
